@@ -6,5 +6,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 installGlobals();
 
 export default defineConfig({
+  server: {
+    watch: {
+      usePolling: true,
+    }
+  },
   plugins: [remix(), tsconfigPaths()],
 });

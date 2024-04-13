@@ -1,36 +1,15 @@
-# Welcome to Remix + Vite!
+# [anyconvert.fzn0x.rocks](https://anyconvert.fzn0x.rocks)
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+> AnyConvert Website of fzn0x.rocks
 
-## Development
+*The website targets the latest version of Chrome, Safari, and Firefox.*
 
-Run the Vite dev server:
-
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
+## Setup Docker
 
 ```sh
-npm run build
+# build image
+docker build  -f ./Dockerfile . -t remix/run
+
+# run container
+docker run -d --name remix-server -p 3000:3000 remix/run
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
