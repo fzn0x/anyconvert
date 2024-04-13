@@ -289,6 +289,7 @@ export default function Root() {
                 isMulti={false}
                 onChange={(e) => setFromCurrency(e?.value)} 
               />
+              <Text>To</Text>
               <Select 
                 ref={setToCurrencySelectRef}
                 instanceId = "to-currencies-box"
