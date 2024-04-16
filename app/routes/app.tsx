@@ -42,6 +42,8 @@ export default function Root() {
   const [toCurrency, setToCurrency] = useState("");
   const [result, setResult] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCurrencyToLoading, setIsCurrencyToLoading] = useState(false);
+  const [isCurrencyFromLoading, setIsCurrencyFromLoading] = useState(false);
   const [currencyType, setCurrencyType] = useState("Cryptocurrency");
   const setFromCurrencySelectRef = useRef<SelectInstance<SelectOption> | null>(null);
   const setToCurrencySelectRef = useRef<SelectInstance<SelectOption> | null>(null);
@@ -138,27 +140,59 @@ export default function Root() {
   }
 
   async function getFromCurrencies (type = "currencies") {
-    const currencies = await trpc.currencies.query({
-      type: type,
-    })
+    setIsCurrencyFromLoading(true);
+    try {
+      const currencies = await trpc.currencies.query({
+        type: type,
+      })
 
-    if (currencies.length) {
-      setFromCurrencies(currencies);
+      if (currencies.length) {
+        setFromCurrencies(currencies);
+      }
+      
+      return currencies;
+    } catch (err) {
+      if (err instanceof Error) {
+        toast({
+          title: 'Conversion failed.',
+          description: err.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    } finally {
+      setIsCurrencyFromLoading(false);
     }
-    
-    return currencies;
   }
 
   async function getToCurrencies (type = "currencies") {
-    const currencies = await trpc.currencies.query({
-      type: type,
-    })
+    setIsCurrencyToLoading(true);
+    try {
+      const currencies = await trpc.currencies.query({
+        type: type,
+      })
 
-    if (currencies.length) {
-      setToCurrencies(currencies);
+      if (currencies.length) {
+        setToCurrencies(currencies);
+      }
+
+      return currencies;
+    } catch (err) {
+      if (err instanceof Error) {
+        toast({
+          title: 'Conversion failed.',
+          description: err.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+    } finally {
+      setIsCurrencyToLoading(false);
     }
-
-    return currencies;
   }
 
   useEffect(() => {
@@ -246,6 +280,7 @@ export default function Root() {
         rounded="50"
         mb={20}
         minHeight="100vh" 
+        minW={["100%", "400px", "700px"]}
         bg="white"
         borderColor="black" 
         borderWidth="5px"
@@ -280,6 +315,8 @@ export default function Root() {
                 _hover={{ borderColor: "black" }}
               />
               <Select 
+                isLoading={isCurrencyFromLoading}
+                placeholder={ isCurrencyFromLoading ? "Loading..." : "From..."}
                 ref={setFromCurrencySelectRef}
                 instanceId = "from-currencies-box"
                 name="from-currencies-box"
@@ -296,6 +333,8 @@ export default function Root() {
               />
               <Text>To</Text>
               <Select 
+                isLoading={isCurrencyToLoading}
+                placeholder={ isCurrencyToLoading ? "Loading..." : "To..."}
                 ref={setToCurrencySelectRef}
                 instanceId = "to-currencies-box"
                 name="to-currencies-box"
