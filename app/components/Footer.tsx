@@ -14,7 +14,7 @@ export default function Navbar () {
           <Text fontWeight="900" size="md" onClick={() => navigate("/")} cursor="pointer">All rights reserved © AnyConvert Author 2024</Text>
         </Box>
         <Spacer />
-        <Text mr={["none", "none", 10, 20]} fontWeight="100" size="md" m="auto" onClick={() => navigate("/")} cursor="pointer">AnyConvert 0.0.1</Text>
+        <Text mr={["none", "none", 10, 20]} fontWeight="100" size="md" m="auto" onClick={() => navigate("/")} cursor="pointer">AnyConvert 0.0.2</Text>
         <Spacer />
         <Flex p="2" gap={10}>
             <Link cursor="pointer" href="https://www.instagram.com/fzn0x/" isExternal><RiInstagramFill size="30"/></Link>
