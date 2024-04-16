@@ -155,7 +155,7 @@ export default function Root() {
                   rounded='md'
                   shadow='md'
                 >
-                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>You can contact us from our contact page to do further processes.</Text>
+                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>You can contact us from our <Link href="/contact" color="blue.600">contact page</Link> to do further processes.</Text>
                 </Box>
               </Collapse>
             </Flex>
@@ -172,7 +172,7 @@ export default function Root() {
                   rounded='md'
                   shadow='md'
                 >
-                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>You can click here to access AnyConvert github repository.</Text>
+                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>You can click <Link href="https://github.com/fzn0x/anyconvert" color="blue.600" isExternal>here</Link> to access AnyConvert github repository. Don't forget to leave us a star.</Text>
                 </Box>
               </Collapse>
             </Flex>
@@ -189,7 +189,7 @@ export default function Root() {
                   rounded='md'
                   shadow='md'
                 >
-                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>AnyConvert was created by our solo developer Fauzan, Fauzan enjoy making apps.</Text>
+                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>AnyConvert was created by our solo developer <Link href="https://github.com/fzn0x" color="blue.600" isExternal>Fauzan</Link>, Fauzan enjoy making apps.</Text>
                 </Box>
               </Collapse>
             </Flex>
@@ -206,7 +206,7 @@ export default function Root() {
                   rounded='md'
                   shadow='md'
                 >
-                 <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}> You can submit a contribution in AnyConvert github repository to fix any bugs you found on this website.</Text>
+                 <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}> You can submit a contribution in <Link href="https://github.com/fzn0x/anyconvert" color="blue.600" isExternal>AnyConvert github repository</Link> to fix any bugs you found on this website.</Text>
                 </Box>
               </Collapse>
             </Flex>
@@ -223,7 +223,7 @@ export default function Root() {
                   rounded='md'
                   shadow='md'
                 >
-                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>You can contact us from our contact page and explain your issues.</Text>
+                  <Text fontWeight="500" fontSize="1em" whiteSpace={"pre-wrap"}>You can contact us from our <Link href="/contact" color="blue.600">contact page</Link> and explain your issues or access our issue ticket in <Link href="https://github.com/fzn0x/anyconvert/issues" color="blue.600" isExternal>AnyConvert github repository</Link>.</Text>
                 </Box>
               </Collapse>
             </Flex>
