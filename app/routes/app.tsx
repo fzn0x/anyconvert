@@ -41,6 +41,7 @@ export default function Root() {
   const [fromCurrency, setFromCurrency] = useState("");
   const [toCurrency, setToCurrency] = useState("");
   const [result, setResult] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [currencyType, setCurrencyType] = useState("Cryptocurrency");
   const setFromCurrencySelectRef = useRef<SelectInstance<SelectOption> | null>(null);
   const setToCurrencySelectRef = useRef<SelectInstance<SelectOption> | null>(null);
@@ -62,6 +63,7 @@ export default function Root() {
   };
 
   async function getCryptocurrencyRates() {
+    setIsLoading(true);
     try {
       const rates = await trpc.rates.query({
         from: fromCurrency,
@@ -80,6 +82,7 @@ export default function Root() {
         isClosable: true,
         position: "top",
       });
+      setIsLoading(false);
     } catch (err) {
       if (err instanceof Error) {
         toast({
@@ -95,6 +98,7 @@ export default function Root() {
   }
 
   async function getCurrencyRates() {
+    setIsLoading(true);
     try {
       const fromRates = await trpc.rates.query({
         from: fromCurrency,
@@ -118,6 +122,7 @@ export default function Root() {
         isClosable: true,
         position: "top",
       });
+      setIsLoading(false);
     } catch (err) {
       if (err instanceof Error) {
         toast({
@@ -305,18 +310,12 @@ export default function Root() {
                 isMulti={false}
                 onChange={(e) => setToCurrency(e?.value)} 
               />
-              <Button bg="blue.600" _hover={{ bg: "blue.700" }} color="white" onClick={() => currencyType === "Currency" ? getCurrencyRates() : getCryptocurrencyRates()} isDisabled={!amount || !fromCurrency || !toCurrency}>
+              <Button isLoading={isLoading} bg="blue.600" _hover={{ bg: "blue.700" }} color="white" onClick={() => currencyType === "Currency" ? getCurrencyRates() : getCryptocurrencyRates()} isDisabled={!amount || !fromCurrency || !toCurrency}>
                 Convert
               </Button>
               {result !== null && (
-                <Box>
-                  <Input
-                    _disabled={{ color: "black" }}
-                    isDisabled={true}
-                    placeholder="Amount"
-                    value={`${amount} ${(fromCurrency || "").toUpperCase()} is ${Number(result || 0).toFixed(20).replace(/\.0+$/, "")} ${(toCurrency || "").toUpperCase()}`}
-                    fontWeight={800}
-                  />
+                <Box color="black" fontWeight={600} w="auto" whiteSpace={"wrap"} overflowWrap="break-word">
+                  <Text>{amount} {(fromCurrency || "").toUpperCase()} is {Number(result || 0).toFixed(20).replace(/\.0+$/, "")} {(toCurrency || "").toUpperCase()}</Text>
                   <Flex rounded="20" mt={5} color="white" direction={"row"} p="5" bg="blue.400" gap={3}>
                     <IoInformationCircleOutline size="50"/>
                     <Text fontWeight={"700"}>The amount may differ when sending money through other platforms. Compare exchange rates <Link color="blue.800" href="https://wise.com/gb/compare/" isExternal>here.</Link></Text>
